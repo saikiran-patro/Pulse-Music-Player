@@ -1,0 +1,47 @@
+.flex{
+
+    display:flex;
+}
+.justify-center{
+    justify-content: center;
+}
+.align-center{
+
+    align-items: center;
+}
+.border-red{
+    border:5px solid black
+}
+.font-master{
+
+    font-family: 'Noto Sans', sans-serif;
+}
+.margin-15px-top{
+    margin-top:14px;
+}
+
+.textColorBlue{
+
+    color:#3e54ac !important;
+}
+.textColorWhite{
+    color:#ecf2ff !important;
+}
+
+.backgroundBlue{
+
+    background:#3E54AC !important;
+}
+.backgroundWhite{
+    background: #ecf2ff !important;
+}
+.backgroundTransparent{
+    background:transparent;
+}
+.hide{
+
+    display:none !important;
+}
+.show{
+    display:block;
+}
