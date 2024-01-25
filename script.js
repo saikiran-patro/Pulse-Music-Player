@@ -301,7 +301,16 @@ async function main(){
   })
 
 
+  // Ai functionality 
+  const aiContainer=document.querySelector(".aiContainer");
+  document.querySelector(".aiImage").addEventListener("click",()=>{
 
+    aiContainer.style.display="flex"
+  })
+  document.querySelector('.aiCrossHead').addEventListener("click",()=>{
+     aiContainer.style.display="none"
+    
+  })
 
    
 //  audio.play()

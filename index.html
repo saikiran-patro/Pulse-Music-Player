@@ -18,8 +18,8 @@
      <title>Pulse</title>
 </head>
 
-<body>
-    <div class="container flex justify-center">
+<body style="flex-direction: column;position: relative">
+    <div class="container flex justify-center" >
         <div class="leftContainer">
 
 
@@ -74,7 +74,6 @@
                     </div>
                     <div style="position:absolute; right:5%;">
 
-
                         <div class="flex align-center justify-center" style="margin-left: 5px;display: none;;">
                             <img src="images/add.svg" style="width:100%;">
                         </div>
@@ -121,6 +120,9 @@
                         Log in
                     </button>
                     <img src="./images/loginIcon.svg" alt="">
+                    <div class="aiImage">
+                        <img src="./images/Ai.svg">
+                    </div>
                 </div>
             </div>
             <h2 style="margin: 10px 0px; color:#ECF2FF; padding-left:10px;">Your Playlists</h2>
@@ -226,7 +228,26 @@
                 </div>
             </div>
         </div>
+
+
+      
     </div>
+    <div class="aiContainer">
+        <div class="mob_menu_ham_container aiCrossHead" style="display:flex;flex-direction:row-reverse;">
+            <div class="hamburger-menu-left active" style="display: block;">
+                <span class="line line-1"></span>
+                <span class="line line-2"></span>
+                <span class="line line-3"></span>
+              </div>
+
+        </div>
+        <div class="aiTextContainer">
+            <label for="aiPrompt" style="font-size:1.2rem;">Enter Prompt</label>
+            <input type="text" id="aiPrompt" placeholder="eg: a chill song with influences from lofi, chillstep and downtempo" >
+        </div>
+        <button id="aiGenerateButton">Generate</button>
+
+ </div>
 </body>
 
 </html>

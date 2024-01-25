@@ -129,6 +129,95 @@ box-shadow: 0px 6px 29px 0px rgba(0,0,0,0.39); */
 .signUp:hover{
     color:#ECF2FF;
 }
+
+.aiImage{
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0px 40px #3E54AC, 0 5px 25px #3e54ac;
+    cursor: pointer;
+}
+.aiImage img{
+    display: flex;
+    background: #3E54AC;
+    border-radius: 6px;
+    width: 50px 
+
+}
+.aiContainer{
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 45%;
+    background: #121212;
+    margin: 0px auto;
+    width: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    border-radius:15px;
+    box-shadow: 0 0px 10px #3E54AC, 0 0px 40px #3e54ac;
+    padding: 20px;
+    height: 200px;
+    justify-content: center;
+    animation: down 2s ease-in-out;
+    color:#ECF2FF;
+}
+@keyframes down {
+    0%{
+       top: 0%; 
+    }
+ 
+    100%{
+        top: 45%;
+    }
+}
+.aiTextContainer
+{
+    display: flex;
+   justify-content: center;
+   align-items: center;
+
+    width: 100%;
+    flex-direction: column;
+}
+.aiTextContainer input{
+    width: 95%;
+    padding: 10px;
+    margin: 20px auto;
+    border-radius: 6px;
+   border:2px solid #3e54ac;
+   background-color: #3a3434;
+   color: #ECF2FF;
+   outline: none;
+   transition: all 0.5s ease-in-out;
+   
+}
+.aiTextContainer input:focus{
+
+    border: 2px solid #ECF2FF;
+}
+#aiGenerateButton{
+    margin: 0px auto;
+    padding: 12px;
+    margin-top: 20px;
+    width: fit-content;
+    color: #ECF2FF;
+    background: #3e54ac;
+    outline: none;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size:14px;
+    transition: all 0.5s ease-in;
+}
+#aiGenerateButton:hover{
+    box-shadow: 0 0px 10px #ECF2FF, 0 0px 5px #ECF2FF;
+   
+
+}
+
+
 .library{
 
     display: flex;
