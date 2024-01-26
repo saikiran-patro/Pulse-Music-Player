@@ -18,7 +18,7 @@
      <title>Pulse</title>
 </head>
 
-<body style="flex-direction: column;position: relative">
+<body style="flex-direction: column;">
     <div class="container flex justify-center" >
         <div class="leftContainer">
 
@@ -243,10 +243,13 @@
         </div>
         <div class="aiTextContainer">
             <label for="aiPrompt" style="font-size:1.2rem;">Enter Prompt</label>
-            <input type="text" id="aiPrompt" placeholder="eg: a chill song with influences from lofi, chillstep and downtempo" >
+            <input type="text" id="aiPrompt" placeholder="eg: a chill song with influences from lofi, chillstep and downtempo" required >
         </div>
-        <button id="aiGenerateButton">Generate</button>
+        <button id="aiGenerateButton">Generate<img id="aiLoading"src="./images/Loader.svg" /></button>
+        <div class="audioPlayerContainer">
 
+        </div>
+        <p style="font-weight: bold;color: #ECF2FF;font-size:11px;text-align: justify;word-wrap: break-word;margin-top: 30px;"><span style="color:#ECe">**Disclaimer**</span>: AI-generated music is based on learned patterns. It aims to create unique compositions, but may not always meet personal tastes or expectations. It's intended for enjoyment and inspiration, and should not replace human composers. Enjoy, but remember it's an algorithm's interpretation of music. 😊</p>
  </div>
 </body>
 

@@ -69,7 +69,12 @@ function getCurrentSongIndex(){
 
 
 }
-function playMusic(event,playingSongName){
+function playMusic(event,playingSongName, mode="none",prompt="none",srcAi="none"){
+
+  
+  
+
+
   let songName=(this.querySelector("h3").textContent).trim()
   revert(this)
 
@@ -303,13 +308,81 @@ async function main(){
 
   // Ai functionality 
   const aiContainer=document.querySelector(".aiContainer");
+  const aiGenrateButton=document.querySelector("#aiGenerateButton");
+  const audioPlayerContainer=document.querySelector(".audioPlayerContainer");
+  const aiAudioLoading=document.querySelector("#aiLoading")
+ const musicGen=async function(prompt){
+
+   if(prompt==="") {
+    alert("Enter a prompt") 
+    return;
+   }
+  aiAudioLoading.style.display="inline-block";;
+  try{
+  const response = await fetch(
+    "https://api-inference.huggingface.co/models/facebook/musicgen-small",
+    {
+        headers: { Authorization: "Bearer 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" },
+        method: "POST",
+        body: JSON.stringify(prompt),
+    });
+    const result = await response.blob();
+   if(result.type==='application/json'){
+    aiAudioLoading.style.display="none";
+    alert("Retry with a different prompt")
+
+   }
+   else{
+    const audioBuffer = result; // Assuming the response directly holds the audio byte data
+    const audioBlob = new Blob([audioBuffer], { type: 'audio/wav' }); // Create a Blob object
+    const audioUrl = URL.createObjectURL(audioBlob); // Create a temporary URL to access the audio data
+    const audio=new Audio(audioUrl)
+   
+    console.log(audio)
+    aiAudioLoading.style.display="none";
+    audioPlayerContainer.innerHTML='';
+    audioPlayerContainer.appendChild(audio);
+    audio.setAttribute("controls",'');
+    audio.style.margin="25px auto";
+    audio.play(); // Play
+  }
+  }catch(e){
+    alert("Error:")
+    return;
+  }
+  
+  
+  
+ }
+
+
   document.querySelector(".aiImage").addEventListener("click",()=>{
 
     aiContainer.style.display="flex"
+    audioPlayerContainer.innerHTML='';
+    if(!playingSongName.paused)
+    {
+       stopAnimation(playingSongName);
+    }
   })
   document.querySelector('.aiCrossHead').addEventListener("click",()=>{
-     aiContainer.style.display="none"
+     aiContainer.style.display="none";
+     audioPlayerContainer.innerHTML='';
+     
     
+  })
+  aiGenrateButton.addEventListener("click", async ()=>{
+    audioPlayerContainer.innerHTML='';
+   let defaultPrompt="a chill song with influences from lofi, chillstep and downtempo"
+   const prompt= document.querySelector('#aiPrompt').value;
+   if(prompt.length===0)
+   {
+    musicGen("")
+   }
+   else{
+    musicGen({"inputs":prompt})
+   }
+   
   })
 
    
