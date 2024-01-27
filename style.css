@@ -362,16 +362,14 @@ box-shadow: 0px 6px 29px 0px rgba(0,0,0,0.39); */
 .mediaAction{
     background: transparent;
     bottom: 22px;
-    height: 20%;
+    padding-top: 20px;;
     display: flex;
     align-items: flex-end;
     justify-content: center;
     flex-direction: column;
     width: 100%;
-    /* box-shadow: rgba(0, 0, 0, 0.45) 1px 1px 40px 0px inset; */
-    /* box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px inset, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset; */
-    border-radius: 10px;;
-    padding-bottom: 20px;;
+        border-radius: 10px;;
+    
 }
 .mediaActionButtons {
 
@@ -398,7 +396,7 @@ box-shadow: 0px 6px 29px 0px rgba(0,0,0,0.39); */
     align-items: center;
     justify-content: center;
     margin: 20px auto;
-    padding-bottom: 20px;
+   
 }
 .songListsContainer{
 
@@ -744,7 +742,7 @@ box-shadow: 0px 6px 29px 0px rgba(0,0,0,0.39); */
     }
     
 }
-@media (max-width:500px){
+@media (max-width:600px){
 
     .right-top-container-right{
             justify-content: end;
@@ -756,5 +754,12 @@ box-shadow: 0px 6px 29px 0px rgba(0,0,0,0.39); */
 
     .right-top-container-right button{
         display: none;;
+    }
+    .aiImage img{
+        width: 50px;
+    }
+    .songInfo * {
+        font-size: 100%;
+        color: #121212;
     }
 }

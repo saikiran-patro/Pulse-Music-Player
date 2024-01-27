@@ -1,12 +1,15 @@
-console.log("js is connected ")
+
 let songList=[]
 const playButton=document.getElementById('play');
 const nextButton=document.getElementById('next');
 const prevButton=document.getElementById('previous')
+let openFolder='Ytmusic'
+let GlobalPlayingSongSrc='';
 let currentSongIndex=0;
-const getSongs = async function(){
+let initalLoad=true;
+const getSongs = async function(folder){
    
-    let musicPromise= await fetch("http://127.0.0.1:5500/Songs/Ytmusic/")
+    let musicPromise= await fetch(`http://127.0.0.1:5500/Songs/${folder}/`)
    
     let data= await musicPromise.text()
    
@@ -69,21 +72,24 @@ function getCurrentSongIndex(){
 
 
 }
-function playMusic(event,playingSongName, mode="none",prompt="none",srcAi="none"){
+function playMusic(playingSongName,folder){
 
-  
-  
-
+  initalLoad=false
+   
+ //setting album image
+ 
+   document.querySelector('.mediaAlbumImage').querySelector('img').setAttribute("src",`./Songs/${openFolder}/cover.jpg`)
+ //setting animation of current playing song
 
   let songName=(this.querySelector("h3").textContent).trim()
   revert(this)
-
+  GlobalPlayingSongSrc=this;
   this.querySelector(".songCardDetails").classList.add('textBlue');
   this.classList.add('backgroundWhite');
   this.style.borderRadius="10px"
   this.querySelector('.playing').classList.remove('hide')
   this.querySelector('.playCardButton').getElementsByTagName("img")[0].style.display="none";
-  playingSongName.src="http://127.0.0.1:5500/Songs/Ytmusic/"+songName
+  playingSongName.src=`http://127.0.0.1:5500/Songs/${folder}/`+songName
   this.classList.add('nowPlaying')
   playingSongName.play();
   play.firstChild.setAttribute("src","./images/pause.svg")
@@ -97,8 +103,7 @@ function playMusic(event,playingSongName, mode="none",prompt="none",srcAi="none"
   const endTime=document.querySelector('.endTimeInfo');
 
   playingSongName.addEventListener('timeupdate',()=>{
-    // console.log(playingSongName.currentTime)
-    // console.log(convertSecondsToMinutesSeconds(playingSongName.currentTime))
+
     let secondsFormat=convertSecondsToMinutesSeconds(playingSongName.currentTime)
     if(Number(secondsFormat.split('.')[0].split(':')[1])<10)
     {
@@ -108,8 +113,7 @@ function playMusic(event,playingSongName, mode="none",prompt="none",srcAi="none"
       secondsFormat=secondsFormat.split('.')[0]
     }
     startTime.textContent=`${secondsFormat}`
-    // console.log(playingSongName.duration)
-    // console.log(convertSecondsToMinutesSeconds(playingSongName.duration))
+   
     endTime.textContent=`${convertSecondsToMinutesSeconds(playingSongName.duration).split('.')[0]}`
 
     document.querySelector('.circle').style.left=((playingSongName.currentTime/playingSongName.duration)*100)+"%"
@@ -134,10 +138,20 @@ function playMusic(event,playingSongName, mode="none",prompt="none",srcAi="none"
    
   })
   circleNob.addEventListener('dragstart',(e)=>{
-    console.log("e.target",e.target)
+
   })
    currentSongIndex=getCurrentSongIndex();
   
+}
+function currentPlay(card){
+
+  card.querySelector(".songCardDetails").classList.add('textBlue');
+ card.classList.add('backgroundWhite');
+  card.style.borderRadius="10px"
+  card.querySelector('.playing').classList.remove('hide')
+ card.querySelector('.playCardButton').getElementsByTagName("img")[0].style.display="none";
+//  playingSongName.src=`http://127.0.0.1:5500/Songs/${folder}/`+songName
+  card.classList.add('nowPlaying')
 }
 
 
@@ -160,15 +174,15 @@ function stopAnimation(playingSongName){
   const animatedElements=document.querySelectorAll(".playing");
   let animatedImg;
   animatedElements.forEach((animatedElement)=>{
-    //console.log(animatedElement.getAttribute("class"))
+   
     if((animatedElement.getAttribute("class"))==="playing")
     {
       animatedImg=animatedElement.getElementsByTagName('img')[0]
-     // console.log(animatedElement)
+   
       
     }
   })
-  //console.log(animatedImg)
+  
   if(playingSongName.paused){
     playingSongName.play();
     play.firstChild.setAttribute("src","./images/pause.svg")
@@ -183,15 +197,79 @@ function stopAnimation(playingSongName){
   }
 
 }
-async function main(){
 
-  let songs = await getSongs();
-  //console.log(songs);
-  let playingSongName=new Audio();
+// function for load albums
+
+async function displayAlbums(playingSongName){
+  const playListContainer= document.querySelector(".playlistContainer");
+  const AlbumJson= await fetch('http://127.0.0.1:5500/Songs/');
+  const albumJ= await AlbumJson.text();
+  let div= document.createElement("div")
+  div.innerHTML=albumJ;
+  let anchors=div.querySelectorAll('a');
+  for(let i=0; i<anchors.length; i++){
+    let href=anchors[i].getAttribute("href");
+    
+    if(href.includes("/Songs/")){
+       let folderName=href.split("/")[2];
+       const folderJson= await fetch(`http://127.0.0.1:5500/Songs/${folderName}/info.json`);
+       let folderResponse= await folderJson.json();
+       playListContainer.innerHTML+= ` <div class="card" data-folder="${folderName}">
+       <div class="albumImage">
+           <img src="./Songs/${folderName}/cover.jpg" alt="img">
+           <div class="playButton">
+               <img src="images/play.svg" alt="">
+           </div>
+       </div>
+       <div class="albumDetails">
+           <h2>${folderResponse.title}</h2>
+           <p>${folderResponse.description}</p>
+           <p>${folderResponse.year}</p>
+       </div>
+
+
+   </div>`
+     
+    }
+  }
+  
+  
+  document.querySelectorAll('.card').forEach( (card)=>{
+
+    card.addEventListener("click", async(event)=>{
+      
+      openFolder=event.currentTarget.dataset.folder
+      displayAlbumSongs(playingSongName,event.currentTarget.dataset.folder);
+    })
+
+   
+  })
+
+
+   
+
+ 
+
+}
+function loadMusicRotation(){
+  
+  document.querySelectorAll('.songCard').forEach((card)=>{
+    if(GlobalPlayingSongSrc!==''){
+     
+    if(card.querySelector('.songCardDetails').querySelector('h3').textContent=== GlobalPlayingSongSrc.querySelector(".songCardDetails").querySelector('h3').textContent){
+     
+      currentPlay(card);
+    }
+    
+  }
+  })
+}
+async function displayAlbumSongs(playingSongName,folder){
+  let songs = await getSongs(folder);
   const songFragment= document.createDocumentFragment();
   songs.forEach((song)=>{
 
-    let songName=song.split("Ytmusic/")[1]
+    let songName=song.split(`${folder}/`)[1]
     songName=songName.replaceAll("%20"," ");
     let songCard=document.createElement("div");;
     songCard.classList.add("songCard");
@@ -242,21 +320,36 @@ async function main(){
 
     
     songCard.addEventListener("click", function(event){
-      playMusic.bind(songCard)(event, playingSongName);
+      playMusic.bind(songCard)(playingSongName,folder);
     });
   
 
+   
     songFragment.appendChild(songCard);
-
-
-
  
   })
-  let songListsContainer=document.querySelector('.songListsContainer');
-
-  songListsContainer.appendChild(songFragment);
   
-  let allSongCards=document.querySelectorAll('.songCard');
+  let songListsContainer=document.querySelector('.songListsContainer');
+  songListsContainer.innerHTML=''
+  songListsContainer.appendChild(songFragment);
+  loadMusicRotation()
+  currentSongIndex=getCurrentSongIndex();
+}
+
+
+async function main(){
+
+ 
+  document.querySelector('.mediaAlbumImage').querySelector('img').setAttribute("src",`./Songs/${openFolder}/cover.jpg`)
+  
+  
+  let playingSongName=new Audio();
+ 
+  // load the playlist in the intial run of the App
+  displayAlbumSongs(playingSongName,"Ytmusic");
+  
+  
+ 
   
   // This function will be called when the music finishes playing
   
@@ -268,18 +361,25 @@ async function main(){
 
   play.addEventListener("click",()=>{
    
+    if(initalLoad)
+    {
+     
+      playMusic.bind(document.querySelectorAll('.songCard')[0])(playingSongName,openFolder);
+   
+    }
+    else{
     stopAnimation(playingSongName)
-    
+  }
   })
   prevButton.addEventListener("click",()=>{
      
-    console.log(getCurrentSongIndex())
-   // console.log(songList)
+   
+    let allSongCards=document.querySelectorAll('.songCard');
     let songIndex=0
    for(let songCard of allSongCards){
       if(songIndex==getCurrentSongIndex()-1){
 
-        playMusic.bind(songCard)(event, playingSongName);
+        playMusic.bind(songCard)(playingSongName,openFolder);
       }
       songIndex++;
 
@@ -290,13 +390,14 @@ async function main(){
   nextButton.addEventListener("click",()=>{
      
     let i=getCurrentSongIndex()
-   // console.log(songList)
+  
+   let allSongCards=document.querySelectorAll('.songCard');
     let songIndex=0
    for(let songCard of allSongCards){
       if(songIndex===i+1){
 
    
-        playMusic.bind(songCard)(event, playingSongName);
+        playMusic.bind(songCard)(playingSongName,openFolder);
       }
       songIndex++;
 
@@ -349,7 +450,7 @@ async function main(){
     const audioUrl = URL.createObjectURL(audioBlob); // Create a temporary URL to access the audio data
     const audio=new Audio(audioUrl)
    
-    console.log(audio)
+ 
     aiAudioLoading.style.display="none";
     audioPlayerContainer.innerHTML='';
     audioPlayerContainer.appendChild(audio);
@@ -395,7 +496,14 @@ async function main(){
    }
    
   })
+   
+  //  Load Albums
+  displayAlbums(playingSongName);
+   // click on Album to load songs list
+  
 
+ 
+ 
    
 //  audio.play()
 }
