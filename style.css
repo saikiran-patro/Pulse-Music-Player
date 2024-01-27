@@ -153,14 +153,15 @@ box-shadow: 0px 6px 29px 0px rgba(0,0,0,0.39); */
 .aiImage::before{
 
     content: '';
-    width: 51px;
+    width: 58px;
     position: absolute;
-    height: 50px;
+    height: 58px;
     /* right: 0px; */
     z-index: -1;
-    border-radius: 15px;
+    border-radius: 18px;
     background: #ECF2FF;
     animation: rotation 2s infinite linear;
+
 
 }
 
@@ -377,6 +378,7 @@ box-shadow: 0px 6px 29px 0px rgba(0,0,0,0.39); */
     display: flex;
     gap: 5%;
     padding-top: 20px;
+    padding-bottom: 30px;
     align-items: center;
     width: 100%;
     justify-content: center;
@@ -389,6 +391,14 @@ box-shadow: 0px 6px 29px 0px rgba(0,0,0,0.39); */
     border-radius: 100%;
     cursor: pointer;
 
+}
+.volumeContainer{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px auto;
+    padding-bottom: 20px;
 }
 .songListsContainer{
 
@@ -696,7 +706,7 @@ box-shadow: 0px 6px 29px 0px rgba(0,0,0,0.39); */
 
         position: absolute;
         left: -110%;
-        z-index: 1;
+        z-index: 3;
         height: 100%;
         padding: 5px;
         width: 100%;

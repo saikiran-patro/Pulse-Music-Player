@@ -304,7 +304,18 @@ async function main(){
    
    
   })
-
+  //Volume functionality
+  const volumeElement=document.querySelector("#volume")
+  const volumeImage=document.querySelector("#volumeImg")
+  volumeElement.addEventListener('change',(e)=>{
+    if(e.target.value==0){
+      volumeImage.setAttribute("src","./images/volumeMute.svg")
+    }
+    else{
+      volumeImage.setAttribute("src","./images/volume.svg")
+    }
+    playingSongName.volume=e.target.value/100
+  })
 
   // Ai functionality 
   const aiContainer=document.querySelector(".aiContainer");
