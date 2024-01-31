@@ -657,7 +657,7 @@ box-shadow: 0px 6px 29px 0px rgba(0,0,0,0.39); */
 
 @media (max-width:1500px ) {
     .right{
-        height: 100%;
+        height: max-content;
         position: relative;
     }
     .right-bottom-container{
