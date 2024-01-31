@@ -27,12 +27,14 @@ const getSongs = async function(folder){
     return music;
 }
 function convertSecondsToMinutesSeconds(seconds) {
+  seconds= parseInt(seconds.toFixed(2));
   const minutes = Math.floor(seconds / 60);
   const remainingSeconds = seconds % 60;
 
   // Pad minutes and seconds with leading zeros if needed
   const minutesString = minutes.toString().padStart(2, '0');
   const secondsString = remainingSeconds.toString().padStart(2, '0');
+ 
   if(isNaN(secondsString) || isNaN(secondsString)){return "00:00"}
   return `${minutesString}:${secondsString}`;
 }
@@ -92,7 +94,8 @@ function playMusic(playingSongName,folder){
   playingSongName.src=`http://127.0.0.1:5500/Songs/${folder}/`+songName
   this.classList.add('nowPlaying')
   playingSongName.play();
-  play.firstChild.setAttribute("src","./images/pause.svg")
+  console.log(play)
+  play.querySelector('img').setAttribute("src","./images/pause.svg")
   
   // Album Song Info
   document.querySelector('.songInfo').children[0].textContent=songName
@@ -105,13 +108,7 @@ function playMusic(playingSongName,folder){
   playingSongName.addEventListener('timeupdate',()=>{
 
     let secondsFormat=convertSecondsToMinutesSeconds(playingSongName.currentTime)
-    if(Number(secondsFormat.split('.')[0].split(':')[1])<10)
-    {
-      secondsFormat= "00:0"+secondsFormat.split('.')[0].split(':')[1]
-    }
-    else{
-      secondsFormat=secondsFormat.split('.')[0]
-    }
+   
     startTime.textContent=`${secondsFormat}`
    
     endTime.textContent=`${convertSecondsToMinutesSeconds(playingSongName.duration).split('.')[0]}`
@@ -185,13 +182,13 @@ function stopAnimation(playingSongName){
   
   if(playingSongName.paused){
     playingSongName.play();
-    play.firstChild.setAttribute("src","./images/pause.svg")
+    play.querySelector('img').setAttribute("src","./images/pause.svg")
     animatedImg.style.setProperty('animation-play-state', 'running');
   }
   else{
 
     playingSongName.pause();
-    play.firstChild.setAttribute("src","./images/playBlue.svg")
+    play.querySelector('img').setAttribute("src","./images/playBlue.svg")
     animatedImg.style.setProperty('animation-play-state', 'paused');
 
   }
