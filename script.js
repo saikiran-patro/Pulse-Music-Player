@@ -1,5 +1,6 @@
 
 let songList=[]
+let allFolders=[]
 const playButton=document.getElementById('play');
 const nextButton=document.getElementById('next');
 const prevButton=document.getElementById('previous')
@@ -7,6 +8,15 @@ let openFolder='Ytmusic'
 let GlobalPlayingSongSrc='';
 let currentSongIndex=0;
 let initalLoad=true;
+function getSongFolderMap(){
+   
+  let folderMap = {};
+  function getSongFolderRef(){
+    return folderMap;
+  }
+  return getSongFolderRef;
+
+}
 const getSongs = async function(folder){
    
     let musicPromise= await fetch(`http://127.0.0.1:5500/Songs/${folder}/`)
@@ -196,7 +206,20 @@ function stopAnimation(playingSongName){
 }
 
 // function for load albums
+function lowerCaseName(songName){
+  let lowercaseSongName = "";
+  
+  for (let i = 0; i < songName.length; i++) {
+    
 
+    
+    lowercaseSongName += songName[i].toLowerCase();
+    
+    
+    
+  }
+  return lowercaseSongName;
+}
 async function displayAlbums(playingSongName){
   const playListContainer= document.querySelector(".playlistContainer");
   const AlbumJson= await fetch('http://127.0.0.1:5500/Songs/');
@@ -209,8 +232,12 @@ async function displayAlbums(playingSongName){
     
     if(href.includes("/Songs/")){
        let folderName=href.split("/")[2];
+       allFolders.push(folderName);
        const folderJson= await fetch(`http://127.0.0.1:5500/Songs/${folderName}/info.json`);
        let folderResponse= await folderJson.json();
+       //console.log(JSON.parse(folderResponse.songList))
+      // songList=[...songList,...JSON.parse(folderResponse.songList)]
+       //console.log(songList)
        playListContainer.innerHTML+= ` <div class="card" data-folder="${folderName}">
        <div class="albumImage">
            <img src="./Songs/${folderName}/cover.jpg" alt="img">
@@ -241,13 +268,36 @@ async function displayAlbums(playingSongName){
 
    
   })
+    // load all songs from folders for seach 
+  let folderMap=getSongFolderMap()();
 
 
-   
+  for(let folderName of allFolders){
+      
+     let songs=await getSongs(folderName);
+     songs.forEach((song)=>{
+
+      let songName=song.split(`${folderName}/`)[1]
+      songName=songName.replaceAll("%20"," ");
+     
+      songName=lowerCaseName(songName)
+      console.log(songName)
+      songList.push(songName.trim());
+      folderMap[songName] = folderName;
+     })
+
+  }
+
+    function getfolderMapSongs(){
+      return folderMap;
+    }
+ 
+    return getfolderMapSongs;
 
  
 
 }
+
 function loadMusicRotation(){
   
   document.querySelectorAll('.songCard').forEach((card)=>{
@@ -263,6 +313,8 @@ function loadMusicRotation(){
 }
 async function displayAlbumSongs(playingSongName,folder){
   let songs = await getSongs(folder);
+  console.log("Songs---------------------->")
+  console.log(songs)
   const songFragment= document.createDocumentFragment();
   songs.forEach((song)=>{
 
@@ -334,6 +386,40 @@ async function displayAlbumSongs(playingSongName,folder){
 }
 
 
+async function searchLoad(playingSongName,mapFolderRef,searchValue){
+  searchValue=lowerCaseName(searchValue);
+  const searchResultContainer= document.querySelector('.searchResultsContainer');
+  let searchFlag=false;
+  searchResultContainer.innerHTML=''
+   songList.forEach((song)=>{
+
+    if(song.startsWith(searchValue) && searchValue!=''){
+      searchFlag=true;
+      
+      searchResultContainer.innerHTML+=`<div class="searchResultCard">
+      ${song}
+      <img src="./images/play.svg" alt="playicon"style="width: 30px; margin-right: 10px"/>
+    </div>`
+      
+    }
+   })
+   
+   
+   if(!searchFlag){
+    searchResultContainer.innerHTML=`<div class="searchResultCard">
+    No Results Found
+    <img src="./images/play.svg" alt="playicon"style="width: 30px; margin-right: 10px;display:none;"/>
+  </div>`
+   }
+   if(searchValue===''){
+      searchResultContainer.innerHTML='';
+      
+   }
+   
+
+  // console.log(allFolders)
+
+}
 async function main(){
 
  
@@ -494,9 +580,13 @@ async function main(){
    
   })
    
-  //  Load Albums
-  displayAlbums(playingSongName);
+  //  Load Albums and get ref of foldermap
+    let getRefFolderMap=await displayAlbums(playingSongName);
+  
+    document.querySelector('#searchBox').addEventListener('keyup',(event)=>{searchLoad(playingSongName,getRefFolderMap,event.target.value)})
+     
    // click on Album to load songs list
+
   
 
  

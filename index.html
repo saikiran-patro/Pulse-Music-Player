@@ -1,219 +1,287 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" href="./icons/Pulse-removebg-preview.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@1,300;1,500;1,600&display=swap"
-        rel="stylesheet" />
-    <script src="https://kit.fontawesome.com/3f7a88a4dc.js" crossorigin="anonymous"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@1,300;1,500;1,600&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      src="https://kit.fontawesome.com/3f7a88a4dc.js"
+      crossorigin="anonymous"
+    ></script>
     <link rel="stylesheet" href="./style.css" />
     <link rel="stylesheet" href="./utility.css" class="css" />
     <script src="./script.js" defer></script>
-    
+
     <script src="./Auth.js" defer type="module"></script>
-    <script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs" type="module"></script>
+    <script
+      src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs"
+      type="module"
+    ></script>
 
     <title>Pulse</title>
-</head>
+  </head>
 
-<body style="flex-direction: column">
+  <body style="flex-direction: column">
     <div class="container flex justify-center">
-        <div class="leftContainer">
-            <div class="left">
-                <div class="logo flex align-center mob_menu">
-                    <div style="display: flex; align-items: center">
-                        <img src="./icons/Pulse-removebg-preview.png" alt="" class="" style="width: 10%" />
+      <div class="leftContainer">
+        <div class="left">
+          <div class="logo flex align-center mob_menu">
+            <div style="display: flex; align-items: center">
+              <img
+                src="./icons/Pulse-removebg-preview.png"
+                alt=""
+                class=""
+                style="width: 10%"
+              />
 
-                        <span class="font-master" style="font-size: 2rem; color: #3e54ac">
-                            Pulse</span>
-                    </div>
-                    <div class="mob_menu_ham_container">
-                        <div class="hamburger-menu-left active">
-                            <span class="line line-1"></span>
-                            <span class="line line-2"></span>
-                            <span class="line line-3"></span>
-                        </div>
-                    </div>
-                </div>
-                <div class="flex align-center margin-15px-top">
-                    <div class="flex align-center justify-center" style="width: 10%; margin-left: 5px">
-                        <img src="./images/home.svg" style="width: 50%" />
-                    </div>
-                    &nbsp;&nbsp;
-                    <span class="" style="font-size: 1rem; color: #3e54ac; font-weight: bold">
-                        Home</span>
-                </div>
-                <div class="flex align-center margin-15px-top" style="display: none;">
-                    <div class="flex align-center justify-center" style="width: 10%; margin-left: 5px">
-                        <img src="./icons/seachWave.png" style="width: 50%" />
-                    </div>
-                    &nbsp;&nbsp;
-                    <span class="" style="font-size: 1rem; color: #3e54ac">
-                        Search</span>
-                </div>
-                <div class="flex align-center margin-15px-top searchBoxContainer" style="
-    background: black;
-    width: 95%;
-    border-radius: 10px;
-    position: relative;
-">
-                    <div class="flex align-center justify-center searchWaveIcon" >
-                        <img src="./icons/seachWave.png" style="width:25px">
-                    </div>
-                    &nbsp;&nbsp;
-    <input type="text" id="searchBox" placeholder="Search Music" >
-                    
-                </div>
+              <span class="font-master" style="font-size: 2rem; color: #3e54ac">
+                Pulse</span
+              >
             </div>
-            <div class="libraryContainer margin-15px-top">
-                <div class="library" style="color: white; position: relative">
-                    <div class="flex align-center">
-                        <div class="flex align-center justify-center" style="margin-left: 12px">
-                            <img src="./images/library.svg" style="width: 100%; transform: rotate(90deg)" />
-                        </div>
-                        &nbsp;&nbsp;
-                        <span class="" style="font-size: 1rem; color: #3e54ac">
-                            Your Library</span>
-                    </div>
-                    <div style="position: absolute; right: 5%">
-                        <div class="flex align-center justify-center" style="margin-left: 5px; display: none">
-                            <img src="images/add.svg" style="width: 100%" />
-                        </div>
-                    </div>
-                </div>
-                <div class="songListsContainer flex margin-15px-top"></div>
+            <div class="mob_menu_ham_container">
+              <div class="hamburger-menu-left active">
+                <span class="line line-1"></span>
+                <span class="line line-2"></span>
+                <span class="line line-3"></span>
+              </div>
             </div>
+          </div>
+          <div class="flex align-center margin-15px-top">
+            <div
+              class="flex align-center justify-center"
+              style="width: 10%; margin-left: 5px"
+            >
+              <img src="./images/home.svg" style="width: 50%" />
+            </div>
+            &nbsp;&nbsp;
+            <span
+              class=""
+              style="font-size: 1rem; color: #3e54ac; font-weight: bold"
+            >
+              Home</span
+            >
+          </div>
+          <div class="flex align-center margin-15px-top" style="display: none">
+            <div
+              class="flex align-center justify-center"
+              style="width: 10%; margin-left: 5px"
+            >
+              <img src="./icons/seachWave.png" style="width: 50%" />
+            </div>
+            &nbsp;&nbsp;
+            <span class="" style="font-size: 1rem; color: #3e54ac">
+              Search</span
+            >
+          </div>
+          <div
+            class="flex align-center margin-15px-top searchBoxContainer"
+            style="
+              background: black;
+              width: 95%;
+              border-radius: 10px;
+              position: relative;
+            "
+          >
+            <div class="flex align-center justify-center searchWaveIcon">
+              <img src="./icons/seachWave.png" style="width: 25px" />
+            </div>
+            &nbsp;&nbsp;
+            <input type="text" id="searchBox" placeholder="Search Music" />
+            <div class="searchResultsContainer">
+              <!-- <div class="searchResultCard">
+                No Results Found
+                <img src="./images/play.svg" alt="playicon"style="width: 30px; margin-right: 10px"/>
+              </div> -->
+              
+            </div>
+          </div>
         </div>
+        <div class="libraryContainer margin-15px-top">
+          <div class="library" style="color: white; position: relative">
+            <div class="flex align-center">
+              <div
+                class="flex align-center justify-center"
+                style="margin-left: 12px"
+              >
+                <img
+                  src="./images/library.svg"
+                  style="width: 100%; transform: rotate(90deg)"
+                />
+              </div>
+              &nbsp;&nbsp;
+              <span class="" style="font-size: 1rem; color: #3e54ac">
+                Your Library</span
+              >
+            </div>
+            <div style="position: absolute; right: 5%">
+              <div
+                class="flex align-center justify-center"
+                style="margin-left: 5px; display: none"
+              >
+                <img src="images/add.svg" style="width: 100%" />
+              </div>
+            </div>
+          </div>
+          <div class="songListsContainer flex margin-15px-top"></div>
+        </div>
+      </div>
 
-        <div class="right">
-            <div class="right-top-container flex align-center">
-                <div style="
+      <div class="right">
+        <div class="right-top-container flex align-center">
+          <div
+            style="
               display: flex;
               align-items: center;
               flex-direction: row;
               width: 50%;
               gap: 10px;
-            ">
-                    <div class="hamburger-menu">
-                        <span class="line line-1"></span>
-                        <span class="line line-2"></span>
-                        <span class="line line-3"></span>
-                    </div>
+            "
+          >
+            <div class="hamburger-menu">
+              <span class="line line-1"></span>
+              <span class="line line-2"></span>
+              <span class="line line-3"></span>
+            </div>
 
-                    <div class="right-top-container-left flex">
-                        <!-- <button class="flex align-center justify-center leftButton">
+            <div class="right-top-container-left flex">
+              <!-- <button class="flex align-center justify-center leftButton">
                             <img src="./images/left-arrow.svg" alt="" />
                         </button>
                         <button class="flex align-center justify-center rightButton">
                             <img src="./images/right-arrow.svg" alt="" />
                         </button> -->
-                        <p style="color:#ecf2ff; font-size:24px"></p>
-                    </div>
-                </div>
-
-                <div class="right-top-container-right flex align-center">
-                    <button class="signUp" id="signup">Sign Up</button>
-                    <button class="login" id="login">Log In</button>
-
-                    <button class="signOut" id="signout">Sign Out</button>
-                    
-                        <img src="./images/loginIcon.svg" alt="">
-                    
-                    <img src="./images/loginIcon.svg"  id="profilePic" alt="" />
-                    <div class="aiImage">
-                        <img src="./images/Ai.svg" />
-                    </div>
-                </div>
+              <p style="color: #ecf2ff; font-size: 24px"></p>
             </div>
-            <h2 style="margin: 10px 0px; color: #ecf2ff; padding-left: 10px; margin-left: 20px;">
-                Your Playlists
-            </h2>
-            <div class="right-bottom-container flex">
-                <div class="playlistContainer flex"></div>
-                <div class="mediaPlayerContainer">
-                    <div class="mediaPlayer">
-                        <div class="albumImage mediaAlbumImage">
-                            <img src="https://i.scdn.co/image/ab67616d0000b273c812fd378635732ad755733d"
-                                style="width: 100%; border-radius: 10px" alt="img" />
-                        </div>
-                        <div class="songInfo">
-                            <h2>Late Night Train - Vans in Japan.mp3</h2>
-                            <p>Sai Kiran, 2023</p>
-                        </div>
-                    </div>
+          </div>
 
-                    <div class="mediaAction">
-                        <div class="mediaActionButtons">
-                            <button id="previous">
-                                <img src="./images/prev.svg" alt="" />
-                            </button>
-                            <button id="play">
-                                <img src="./images/playBlue.svg" alt="" />
-                            </button>
-                            <button id="next">
-                                <img src="./images/next.svg" alt="" />
-                            </button>
-                        </div>
-                        <div class="seekBarContainer">
-                            <div class="seekBar">
-                                <div class="circle" draggable="true"></div>
-                            </div>
-                        </div>
-                        <div class="songDurationContainer">
-                            <div class="startTimeInfo">00:00</div>
-                            <div class="endTimeInfo">00:00</div>
-                        </div>
-                        <div class="volumeContainer">
-                            <img id="volumeImg" src="./images/Volume.svg" style="width: 20px" alt="" />
-                            <input type="range" name="volume" id="volume" />
-                        </div>
-                    </div>
-                </div>
+          <div class="right-top-container-right flex align-center">
+            <button class="signUp" id="signup">Sign Up</button>
+            <button class="login" id="login">Log In</button>
+
+            <button class="signOut" id="signout">Sign Out</button>
+
+            <img src="./images/loginIcon.svg" alt="" />
+
+            <img src="./images/loginIcon.svg" id="profilePic" alt="" />
+            <div class="aiImage">
+              <img src="./images/Ai.svg" />
             </div>
+          </div>
         </div>
+        <h2
+          style="
+            margin: 10px 0px;
+            color: #ecf2ff;
+            padding-left: 10px;
+            margin-left: 20px;
+          "
+        >
+          Your Playlists
+        </h2>
+        <div class="right-bottom-container flex">
+          <div class="playlistContainer flex"></div>
+          <div class="mediaPlayerContainer">
+            <div class="mediaPlayer">
+              <div class="albumImage mediaAlbumImage">
+                <img
+                  src="https://i.scdn.co/image/ab67616d0000b273c812fd378635732ad755733d"
+                  style="width: 100%; border-radius: 10px"
+                  alt="img"
+                />
+              </div>
+              <div class="songInfo">
+                <h2>Late Night Train - Vans in Japan.mp3</h2>
+                <p>Sai Kiran, 2023</p>
+              </div>
+            </div>
+
+            <div class="mediaAction">
+              <div class="mediaActionButtons">
+                <button id="previous">
+                  <img src="./images/prev.svg" alt="" />
+                </button>
+                <button id="play">
+                  <img src="./images/playBlue.svg" alt="" />
+                </button>
+                <button id="next">
+                  <img src="./images/next.svg" alt="" />
+                </button>
+              </div>
+              <div class="seekBarContainer">
+                <div class="seekBar">
+                  <div class="circle" draggable="true"></div>
+                </div>
+              </div>
+              <div class="songDurationContainer">
+                <div class="startTimeInfo">00:00</div>
+                <div class="endTimeInfo">00:00</div>
+              </div>
+              <div class="volumeContainer">
+                <img
+                  id="volumeImg"
+                  src="./images/Volume.svg"
+                  style="width: 20px"
+                  alt=""
+                />
+                <input type="range" name="volume" id="volume" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
     <div class="aiContainer">
-        <div class="mob_menu_ham_container aiCrossHead" style="display: flex; flex-direction: row-reverse">
-            <div class="hamburger-menu-left active" style="display: block">
-                <span class="line line-1"></span>
-                <span class="line line-2"></span>
-                <span class="line line-3"></span>
-            </div>
+      <div
+        class="mob_menu_ham_container aiCrossHead"
+        style="display: flex; flex-direction: row-reverse"
+      >
+        <div class="hamburger-menu-left active" style="display: block">
+          <span class="line line-1"></span>
+          <span class="line line-2"></span>
+          <span class="line line-3"></span>
         </div>
-        <div class="aiTextContainer">
-            <label for="aiPrompt" style="font-size: 1.2rem">Enter Prompt</label>
-            <input type="text" id="aiPrompt"
-                placeholder="eg: a chill song with influences from lofi, chillstep and downtempo" required />
-        </div>
-        <button id="aiGenerateButton">
-            Generate<img id="aiLoading" src="./images/Loader.svg" />
-        </button>
-        <div class="audioPlayerContainer"></div>
-        <p style="
+      </div>
+      <div class="aiTextContainer">
+        <label for="aiPrompt" style="font-size: 1.2rem">Enter Prompt</label>
+        <input
+          type="text"
+          id="aiPrompt"
+          placeholder="eg: a chill song with influences from lofi, chillstep and downtempo"
+          required
+        />
+      </div>
+      <button id="aiGenerateButton">
+        Generate<img id="aiLoading" src="./images/Loader.svg" />
+      </button>
+      <div class="audioPlayerContainer"></div>
+      <p
+        style="
           font-weight: bold;
           color: #ecf2ff;
           font-size: 11px;
           text-align: justify;
           word-wrap: break-word;
           margin-top: 30px;
-        ">
-            <span style="color: #ece">**Disclaimer**</span>: AI-generated music is
-            based on learned patterns. It aims to create unique compositions, but
-            may not always meet personal tastes or expectations. It's intended for
-            enjoyment and inspiration, and should not replace human composers.
-            Enjoy, but remember it's an algorithm's interpretation of music. 😊
-        </p>
+        "
+      >
+        <span style="color: #ece">**Disclaimer**</span>: AI-generated music is
+        based on learned patterns. It aims to create unique compositions, but
+        may not always meet personal tastes or expectations. It's intended for
+        enjoyment and inspiration, and should not replace human composers.
+        Enjoy, but remember it's an algorithm's interpretation of music. 😊
+      </p>
     </div>
-</body>
-<script src="https://www.gstatic.com/firebasejs/8.6.7/firebase-app.js"></script>
+  </body>
+  <script src="https://www.gstatic.com/firebasejs/8.6.7/firebase-app.js"></script>
 
-<!-- TODO: Add SDKs for Firebase products that you want to use
+  <!-- TODO: Add SDKs for Firebase products that you want to use
      https://firebase.google.com/docs/web/setup#available-libraries -->
-<script src="https://www.gstatic.com/firebasejs/8.6.7/firebase-analytics.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.6.7/firebase-auth.js"></script>
-
+  <script src="https://www.gstatic.com/firebasejs/8.6.7/firebase-analytics.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.6.7/firebase-auth.js"></script>
 </html>
