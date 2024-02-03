@@ -426,8 +426,10 @@ async function searchLoad(playingSongName,mapFolderRef,searchValue){
     card.addEventListener("click", async(event)=>{
       
       openFolder=event.currentTarget.dataset.folder
-      console.log("search clicked ")
+      searchResultContainer.innerHTML='';
+      document.querySelector('#searchBox').value='';
       selectedSong=card.textContent.trim();
+
       displayAlbumSongs(playingSongName,event.currentTarget.dataset.folder);
       setTimeout(()=>applySearch(selectedSong,playingSongName,openFolder),1000)
       

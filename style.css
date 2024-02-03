@@ -341,11 +341,13 @@ box-shadow: 0px 6px 29px 0px rgba(0,0,0,0.39); */
 }
 .right-bottom-container{
     padding: 20px;;
+    background-color: #121212;
 }
 
 .playlistContainer{
  width:75%;
  display: flex;
+ background-color: #121212 ;
  gap:5%;
  flex-wrap: wrap;
  height: fit-content;
@@ -707,7 +709,12 @@ box-shadow: 0px 6px 29px 0px rgba(0,0,0,0.39); */
     justify-content: space-between;
 }
 /* Responsive design */
-
+#userWelcomeMob{
+    display:none;
+}
+.loginMobile{
+    display:none ;
+}
 @media (max-width:1500px ) {
     .right{
         height: max-content;
@@ -803,6 +810,18 @@ box-shadow: 0px 6px 29px 0px rgba(0,0,0,0.39); */
 
 @media (max-width: 800px)
 { 
+    #profilePic{
+        width: 15%;
+    }
+    #hamWindow{
+        width: 20% !important;
+    }
+    #userWelcomeDesk{
+        display:none;
+    }
+    #userWelcomeMob{
+        display: block;
+    }
     .playlistContainer{
         justify-content: center;
     }
@@ -811,9 +830,20 @@ box-shadow: 0px 6px 29px 0px rgba(0,0,0,0.39); */
         margin: 5px auto;
     }
     
+    
 }
 @media (max-width:600px){
 
+    #signout{
+        display: none !important;
+
+    }
+    #login{
+        display: none !important;
+    }
+    #signup{
+        display: none !important;
+    }
     .right{
         height: max-content;
     }
@@ -824,9 +854,34 @@ box-shadow: 0px 6px 29px 0px rgba(0,0,0,0.39); */
         display: inline-block;
         width: 10%;
     }
-
+    .loginMobile{
+        display:flex ;
+    }
+    .right-top-container-right{
+        width: 70%;
+    }
     .right-top-container-right button{
-        display: none;;
+        display: none;
+    }
+    .mobLoginContainer{
+        display: flex;
+        justify-content: flex-end;
+        flex-direction: row;
+        align-items: center;
+        width: 200px;
+        gap: 15px;
+        
+    
+    }
+    .mobLoginContainer button{
+        display: flex;
+        outline: none;
+        background-color: #12122A;
+        color: #3e54ac;
+        padding: 5px 10px;
+        border-radius:10px;
+        border: none;
+
     }
     .aiImage img{
         width: 50px;

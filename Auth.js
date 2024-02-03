@@ -19,8 +19,13 @@ const provider= new GoogleAuthProvider();
 const logInButton= document.querySelector('#login');
 const signUpButton=document.querySelector('#signup')
 const signOutButton=document.querySelector('#signout');
-const userNameContainer=document.querySelector('.right-top-container-left').querySelector('p')
 
+const logInButtonMob=document.querySelector('#loginMob');
+const signUpButtonMob=document.querySelector("#signupMob");
+const signOutButtonMob=document.querySelector("#signoutMob");
+
+const userNameContainerDesk=document.querySelector('#userWelcomeDesk')
+const userNameContainerMob=document.querySelector('#userWelcomeMob')
 const profilePic=document.querySelector('#profilePic')
 console.log(logInButton,signUpButton);
 let RESULT;
@@ -61,16 +66,25 @@ onAuthStateChanged(auth, (user) =>{
     logInButton.style.display="none"
     signUpButton.style.display="none"
     signOutButton.style.display="block"
-    userNameContainer.innerHTML=`Welcome ${user.displayName}`
-
+    logInButtonMob.style.display="none";
+    signUpButtonMob.style.display="none"
+    signOutButtonMob.style.display="flex";
+    userNameContainerDesk.innerHTML=`Welcome ${user.displayName}`
+   userNameContainerMob.innerHTML=`Welcome ${user.displayName}`
   }
   else{
     profilePic.style.display="none";
     logInButton.style.display="flex"
     signUpButton.style.display="flex"
     signOutButton.style.display="none"
+    logInButtonMob.style.display="flex";
+    signUpButtonMob.style.display="flex"
+    signOutButtonMob.style.display="none";
   }
 })
 logInButton.addEventListener("click",userSignIn)
+logInButtonMob.addEventListener("click",userSignIn);
 signUpButton.addEventListener("click",userSignIn)
+signUpButtonMob.addEventListener("click",userSignIn)
 signOutButton.addEventListener("click",userSignOut)
+signOutButtonMob.addEventListener("click",userSignOut)
