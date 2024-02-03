@@ -264,14 +264,17 @@ async function displayAlbums(playingSongName){
       
       openFolder=event.currentTarget.dataset.folder
       displayAlbumSongs(playingSongName,event.currentTarget.dataset.folder);
+    
     })
 
    
   })
+
+
     // load all songs from folders for seach 
   let folderMap=getSongFolderMap()();
 
-
+   
   for(let folderName of allFolders){
       
      let songs=await getSongs(folderName);
@@ -287,6 +290,7 @@ async function displayAlbums(playingSongName){
      })
 
   }
+  console.log(folderMap)
 
     function getfolderMapSongs(){
       return folderMap;
@@ -317,7 +321,7 @@ async function displayAlbumSongs(playingSongName,folder){
   console.log(songs)
   const songFragment= document.createDocumentFragment();
   songs.forEach((song)=>{
-
+ console.log("adfa sdfa d f")
     let songName=song.split(`${folder}/`)[1]
     songName=songName.replaceAll("%20"," ");
     let songCard=document.createElement("div");;
@@ -388,6 +392,7 @@ async function displayAlbumSongs(playingSongName,folder){
 
 async function searchLoad(playingSongName,mapFolderRef,searchValue){
   searchValue=lowerCaseName(searchValue);
+  
   const searchResultContainer= document.querySelector('.searchResultsContainer');
   let searchFlag=false;
   searchResultContainer.innerHTML=''
@@ -396,7 +401,7 @@ async function searchLoad(playingSongName,mapFolderRef,searchValue){
     if(song.startsWith(searchValue) && searchValue!=''){
       searchFlag=true;
       
-      searchResultContainer.innerHTML+=`<div class="searchResultCard">
+      searchResultContainer.innerHTML+=`<div class="searchResultCard" data-folder=${mapFolderRef()[song]}>
       ${song}
       <img src="./images/play.svg" alt="playicon"style="width: 30px; margin-right: 10px"/>
     </div>`
@@ -415,10 +420,39 @@ async function searchLoad(playingSongName,mapFolderRef,searchValue){
       searchResultContainer.innerHTML='';
       
    }
+   let selectedSong='';
+   const searchResultCard=document.querySelectorAll('.searchResultCard')
+   searchResultCard.forEach((card)=>{
+    card.addEventListener("click", async(event)=>{
+      
+      openFolder=event.currentTarget.dataset.folder
+      console.log("search clicked ")
+      selectedSong=card.textContent.trim();
+      displayAlbumSongs(playingSongName,event.currentTarget.dataset.folder);
+      setTimeout(()=>applySearch(selectedSong,playingSongName,openFolder),1000)
+      
+    })
+
+   })
+
+   
+
+
+   
    
 
   // console.log(allFolders)
 
+}
+function applySearch(searchSongValue,playingSongName,openFolder){
+  const songCards=document.querySelectorAll('.songCard');
+  songCards.forEach((card)=>{
+    console.log("searched Song Value",searchSongValue)
+    let cardValue=lowerCaseName(card.querySelector('.songCardDetails').firstElementChild.textContent)
+    if(cardValue===searchSongValue){
+      playMusic.bind(card)(playingSongName,openFolder);
+    }
+  })
 }
 async function main(){
 
