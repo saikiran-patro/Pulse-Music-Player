@@ -4,7 +4,7 @@ let allFolders=[]
 const playButton=document.getElementById('play');
 const nextButton=document.getElementById('next');
 const prevButton=document.getElementById('previous')
-let openFolder='Ytmusic'
+let openFolder='NCS'
 let GlobalPlayingSongSrc='';
 let currentSongIndex=0;
 let initalLoad=true;
@@ -109,7 +109,7 @@ function playMusic(playingSongName,folder){
   
   // Album Song Info
   document.querySelector('.songInfo').children[0].textContent=songName
-  document.querySelector('.songInfo').children[1].textContent="Sai Kiran, 2023"
+  document.querySelector('.songInfo').children[1].textContent=`${folder}, 2024`
 
   // setting Song duration
   const startTime=document.querySelector('.startTimeInfo');
@@ -341,7 +341,7 @@ async function displayAlbumSongs(playingSongName,folder){
     songTitle.textContent=songName;
     let songArtistandYear=document.createElement("p");
     songArtistandYear.style.margin="0px";
-    songArtistandYear.textContent="Sai Kiran, 2023"
+    songArtistandYear.textContent=`${folder}, 2024`
     songCardDetails.appendChild(songTitle);
     songCardDetails.appendChild(songArtistandYear);
 
@@ -465,7 +465,7 @@ async function main(){
   let playingSongName=new Audio();
  
   // load the playlist in the intial run of the App
-  displayAlbumSongs(playingSongName,"Ytmusic");
+  displayAlbumSongs(playingSongName,"NCS");
   
   
  
@@ -535,6 +535,12 @@ async function main(){
       volumeImage.setAttribute("src","./images/volume.svg")
     }
     playingSongName.volume=e.target.value/100
+  })
+  volumeImage.addEventListener("click",(e)=>{
+    volumeImage.setAttribute("src","./images/volumeMute.svg")
+    playingSongName.volume=0;
+    volumeElement.value=0;
+
   })
 
   // Ai functionality 
