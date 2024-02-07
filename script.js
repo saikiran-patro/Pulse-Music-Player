@@ -446,6 +446,21 @@ async function searchLoad(playingSongName,mapFolderRef,searchValue){
   // console.log(allFolders)
 
 }
+
+const getHamMenuDynamicHeight=()=>{
+
+
+  const height = window.screen.height;
+  let leftContainer= document.querySelector('.left').clientHeight;
+  const footerContainer= document.querySelector('.footerContainer').clientHeight;
+  const library=document.querySelector('.library').clientHeight;
+  let libraryContainer= Math.round((height-leftContainer)*100 /height);
+  leftContainer=document.querySelector('.leftContainer').clientHeight; 
+  document.querySelector('.libraryContainer').style.height=`${libraryContainer}vh`;
+  document.querySelector('.playlistContainer').style.height=`${libraryContainer}vh`;
+  document.querySelector('.right').style.height=`${leftContainer}px`;
+
+}
 function applySearch(searchSongValue,playingSongName,openFolder){
   const songCards=document.querySelectorAll('.songCard');
   songCards.forEach((card)=>{
@@ -468,10 +483,10 @@ async function main(){
   displayAlbumSongs(playingSongName,"NCS");
   
   
- 
+  
   
   // This function will be called when the music finishes playing
-  
+     
      playingSongName.onended = () => {
  
     stopAnimation(playingSongName);
@@ -629,8 +644,15 @@ async function main(){
      
    // click on Album to load songs list
 
-  
+   //sets the height of the left container to mobile screen width (adaptive screen size)
 
+   
+   window.addEventListener('resize', () => {
+    const bodyWidth = document.body.offsetWidth;
+    const bodyHeight = document.body.offsetHeight;
+    getHamMenuDynamicHeight();
+
+  });
  
  
    
