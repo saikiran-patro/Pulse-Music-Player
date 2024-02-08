@@ -1,3 +1,6 @@
+
+import encrypt from "./AesEncry/encrypt.js"
+
 let songList = []
 let allFolders = []
 const playButton = document.getElementById('play');
@@ -465,6 +468,7 @@ function applySearch(searchSongValue, playingSongName, openFolder) {
     }
   })
 }
+
 async function main() {
 
 
@@ -538,7 +542,7 @@ async function main() {
     if (e.target.value == 0) {
       volumeImage.setAttribute("src", "./images/volumeMute.svg")
     } else {
-      volumeImage.setAttribute("src", "./images/volume.svg")
+      volumeImage.setAttribute("src", "./images/Volume.svg")
     }
     playingSongName.volume = e.target.value / 100
   })
@@ -555,7 +559,8 @@ async function main() {
   const audioPlayerContainer = document.querySelector(".audioPlayerContainer");
   const aiAudioLoading = document.querySelector("#aiLoading")
   const musicGen = async function (prompt) {
-
+   
+    const encryptObj=await encrypt()
     if (prompt === "") {
       alert("Enter a prompt")
       return;
@@ -565,7 +570,7 @@ async function main() {
       const response = await fetch(
         "https://api-inference.huggingface.co/models/facebook/musicgen-small", {
           headers: {
-            Authorization: "Bearer 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"
+            Authorization: CryptoJS.AES.decrypt(encryptObj.AiAuth,encryptObj.cipher).toString(CryptoJS.enc.Utf8)
           },
           method: "POST",
           body: JSON.stringify(prompt),
@@ -646,6 +651,8 @@ async function main() {
     getHamMenuDynamicHeight();
 
   });
+
+  //Ecryption test
 
 
 
