@@ -80,6 +80,8 @@ onAuthStateChanged(auth, (user) =>{
     logInButtonMob.style.display="flex";
     signUpButtonMob.style.display="flex"
     signOutButtonMob.style.display="none";
+    userNameContainerDesk.innerHTML=``
+   userNameContainerMob.innerHTML=``
   }
 })
 logInButton.addEventListener("click",userSignIn)
