@@ -20,7 +20,7 @@ function getSongFolderMap() {
 }
 const getSongs = async function (folder) {
 
-  let musicPromise = await fetch(`http://127.0.0.1:5500/Songs/${folder}/`)
+  let musicPromise = await fetch(`/Songs/${folder}/`)
 
   let data = await musicPromise.text()
 
@@ -106,7 +106,7 @@ function playMusic(playingSongName, folder) {
   this.style.borderRadius = "10px"
   this.querySelector('.playing').classList.remove('hide')
   this.querySelector('.playCardButton').getElementsByTagName("img")[0].style.display = "none";
-  playingSongName.src = `http://127.0.0.1:5500/Songs/${folder}/` + songName
+  playingSongName.src = `/Songs/${folder}/` + songName
   this.classList.add('nowPlaying')
   playingSongName.play();
 
@@ -162,7 +162,7 @@ function currentPlay(card) {
   card.style.borderRadius = "10px"
   card.querySelector('.playing').classList.remove('hide')
   card.querySelector('.playCardButton').getElementsByTagName("img")[0].style.display = "none";
-  //  playingSongName.src=`http://127.0.0.1:5500/Songs/${folder}/`+songName
+  //  playingSongName.src=`/Songs/${folder}/`+songName
   card.classList.add('nowPlaying')
 }
 
@@ -225,7 +225,7 @@ function lowerCaseName(songName) {
 }
 async function displayAlbums(playingSongName) {
   const playListContainer = document.querySelector(".playlistContainer");
-  const AlbumJson = await fetch('http://127.0.0.1:5500/Songs/');
+  const AlbumJson = await fetch('/Songs/');
   const albumJ = await AlbumJson.text();
   let div = document.createElement("div")
   div.innerHTML = albumJ;
@@ -236,7 +236,7 @@ async function displayAlbums(playingSongName) {
     if (href.includes("/Songs/")) {
       let folderName = href.split("/")[2];
       allFolders.push(folderName);
-      const folderJson = await fetch(`http://127.0.0.1:5500/Songs/${folderName}/info.json`);
+      const folderJson = await fetch(`/Songs/${folderName}/info.json`);
       let folderResponse = await folderJson.json();
 
       playListContainer.innerHTML += ` <div class="card" data-folder="${folderName}">
