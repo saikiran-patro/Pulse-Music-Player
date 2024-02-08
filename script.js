@@ -233,7 +233,7 @@ async function displayAlbums(playingSongName) {
   for (let i = 0; i < anchors.length; i++) {
     let href = anchors[i].getAttribute("href");
 
-    if (href.includes("/Songs/")) {
+    if (href.includes("/Songs/") &&  !href.includes(".htaccess")) {
       let folderName = href.split("/")[2];
       allFolders.push(folderName);
       const folderJson = await fetch(`/Songs/${folderName}/info.json`);
