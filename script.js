@@ -1,5 +1,5 @@
 
-import encrypt from "./AesEncry/encrypt.js"
+import encrypt from "./encrypt.js"
 
 let songList = []
 let allFolders = []
@@ -268,7 +268,10 @@ async function displayAlbums(playingSongName) {
 
       openFolder = event.currentTarget.dataset.folder
       displayAlbumSongs(playingSongName, event.currentTarget.dataset.folder);
-
+      
+       
+      
+      
     })
 
 
@@ -319,7 +322,7 @@ function loadMusicRotation() {
     }
   })
 }
-async function displayAlbumSongs(playingSongName, folder) {
+async function displayAlbumSongs(playingSongName, folder,initalLoad=false) {
   let songs = await getSongs(folder);
 
   const songFragment = document.createDocumentFragment();
@@ -382,6 +385,12 @@ async function displayAlbumSongs(playingSongName, folder) {
   songListsContainer.appendChild(songFragment);
   loadMusicRotation()
   currentSongIndex = getCurrentSongIndex();
+  if(!initalLoad){
+    playMusic.bind(document.querySelectorAll('.songCard')[0])(playingSongName, folder)
+
+  }
+
+
 }
 
 
@@ -478,7 +487,7 @@ async function main() {
   let playingSongName = new Audio();
 
   // load the playlist in the intial run of the App
-  displayAlbumSongs(playingSongName, "NCS");
+  displayAlbumSongs(playingSongName, "NCS",true);
 
 
 
